@@ -10,8 +10,58 @@ namespace Milionerzy.ConsoleApplication
 {
     public static class Menu
     {
-        public static int getAnswerItem(string[] inArray)
+        public static string[] getLifebuoys(Game game)
         {
+            string[] lifebuoys = new string[3];
+
+            if (!game.fiftyFifty)
+            {
+                lifebuoys[0] = "Pół na pół";
+            }
+            else
+            {
+                lifebuoys[0] = string.Empty;
+            }
+
+            if (!game.publicQuestion)
+            {
+                lifebuoys[1] = "Pytanie do publiczności";
+            }
+            else
+            {
+                lifebuoys[1] = string.Empty;
+            }
+
+            if (!game.changeQuestion)
+            {
+                lifebuoys[2] = "Zmiana pytania";
+            }
+            else
+            {
+                lifebuoys[2] = string.Empty;
+            }
+            return lifebuoys;
+        }
+
+        public static int getAnswerItem(string[] answers, string[] lifebuoys)
+        {
+            int count = 0;
+            for(int i=0; i<lifebuoys.Length;i++)
+            {
+                if (lifebuoys[i] != string.Empty)
+                    count++;
+            }
+            string[] inArray = new string[answers.Length + count];
+            answers.CopyTo(inArray, 0);
+            count = 0;
+            for (int i = 0; i < lifebuoys.Length; i++)
+            {
+                if (lifebuoys[i] != string.Empty)
+                {
+                    inArray[answers.Length + count] = lifebuoys[i];
+                    count++;
+                }
+            }
             Console.SetCursorPosition(0, Console.CursorTop);
 
             bool loopComplete = false;
@@ -20,7 +70,7 @@ namespace Milionerzy.ConsoleApplication
             int selectedItem = 0;
             int a = topOffset;
             ConsoleKeyInfo kb;
-            string[] abcd = { "| A) ", "| B) ", "| C) ", "| D) " };
+            string[] abcd = { "| A) ", "| B) ", "| C) ", "| D) ", "| ", "| ", "| ", "| " };
 
             Console.CursorVisible = false;
 
@@ -38,7 +88,7 @@ namespace Milionerzy.ConsoleApplication
                 for (int i = 0; i < inArray.Length; i++)
                 {
 
-                    if (i == selectedItem)
+                    if (i == selectedItem && inArray[i] != string.Empty)
                     {//This section is what highlights the selected item
 
                         Console.BackgroundColor = ConsoleColor.Gray;
@@ -49,7 +99,7 @@ namespace Milionerzy.ConsoleApplication
                         topOffset = Console.CursorTop;
                         Console.SetCursorPosition(0, topOffset);
                     }
-                    else
+                    else if (inArray[i] != string.Empty)
                     {//this section is what prints unselected items
 
                         Console.Write(abcd[i] + inArray[i]);
@@ -57,7 +107,17 @@ namespace Milionerzy.ConsoleApplication
                         topOffset = Console.CursorTop;
                         Console.SetCursorPosition(0, topOffset);
                     }
+                    if (i == 3)
+                    {
+                        drawLine();
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("| Koła ratunkowe:");
+                        writeSentence("| Koła ratunkowe:");
+                        Console.ResetColor();
+                    }
                 }
+                drawLine();
 
                 bottomOffset = Console.CursorTop;
 
@@ -102,6 +162,25 @@ namespace Milionerzy.ConsoleApplication
             Console.SetCursorPosition(40, bottomOffset);
 
             Console.CursorVisible = true;
+            if (selectedItem == 4)
+            {
+                if (lifebuoys[0] == string.Empty)
+                {
+                    if (lifebuoys[1] != string.Empty)
+                        selectedItem = 5;
+                    else
+                        selectedItem = 6;
+                }
+            }
+            else if (selectedItem == 5)
+            {
+                if (lifebuoys[0] == string.Empty)
+                {
+                    selectedItem = 6;
+                }
+                if (lifebuoys[1] == string.Empty)
+                    selectedItem = 6;
+            }
             return selectedItem;
         }
 
@@ -133,10 +212,10 @@ namespace Milionerzy.ConsoleApplication
             {//This for loop prints the array out
                 for (int i = 0; i < inArray.Length; i++)
                 {
-                 
+
                     if (i == selectedItem)
                     {//This section is what highlights the selected item
-                        
+
                         Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(inArray[i]);
@@ -146,10 +225,10 @@ namespace Milionerzy.ConsoleApplication
                     }
                     else
                     {//this section is what prints unselected items
-                        
+
                         Console.WriteLine(inArray[i]);
                         topOffset = Console.CursorTop;
-                        Console.SetCursorPosition(40,topOffset);
+                        Console.SetCursorPosition(40, topOffset);
                     }
                 }
 
@@ -210,10 +289,11 @@ namespace Milionerzy.ConsoleApplication
         {
             drawLine();
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("| " + question.Content);
-            for (int i = question.Content.Length; i < Console.WindowWidth-3; i++)
+            for (int i = question.Content.Length; i < Console.WindowWidth - 3; i++)
             {
-                if (i<Console.WindowWidth-4)
+                if (i < Console.WindowWidth - 4)
                 {
                     Console.Write(" ");
                 }
@@ -223,6 +303,7 @@ namespace Milionerzy.ConsoleApplication
                 }
             }
 
+            Console.ResetColor();
             Console.WriteLine();
             //Console.Write("| a) " + question.Answers[0]);
             //writeSentence(question.Answers[0]);
@@ -285,7 +366,7 @@ namespace Milionerzy.ConsoleApplication
                 }
                 else
                 {
-                    if(i==1 || i == 7)
+                    if (i == 1 || i == 6)
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.ForegroundColor = ConsoleColor.Cyan;
