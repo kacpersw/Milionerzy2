@@ -1,0 +1,71 @@
+﻿Zwarta grupa zawodników jadących w wyścigu kolarskim to:
+aktyw
+peleton
+konwój
+plejada
+1
+0
+3
+
+Który z wymienionych pojazdów nie jest wyposażony w gąsienice ?
+czołg
+ratrak
+autokar
+koparka
+2
+0
+1
+
+Mężczyzna zabiegający o względy kobiety to:
+administrator
+orator
+kombinator
+adorator
+3
+0
+2
+
+W aeroklubie nie jest zrzeszony:
+spadochroniarz
+autopilot
+modelarz lotniczy
+pilot sportowy
+1
+2
+3
+
+Który z wymienionych ptaków nie potrafi latać ?
+orzeł
+tukan
+struś
+albatros
+2
+0
+3
+
+Jaka figura geometryczna jest również instrumentem muzycznym ?
+koło
+trapez
+trójkąt
+romb
+2
+1
+3
+
+Co Kopciuszek zgubił na schodach pałacu ?
+chusteczkę
+pantofelek
+parasolkę
+torebkę
+1
+2
+3
+
+W Wenecji popularnym środkiem lokomocji jest:
+katamaran
+gondola
+tratwa
+piroga
+1
+0
+3

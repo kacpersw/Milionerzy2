@@ -1,0 +1,13 @@
+C:\Users\Kacper\Desktop\Milionerzy\Milionerzy\bin\Debug\Milionerzy.exe.config
+C:\Users\Kacper\Desktop\Milionerzy\Milionerzy\obj\Debug\Milionerzy.csprojResolveAssemblyReference.cache
+C:\Users\Kacper\Desktop\Milionerzy\Milionerzy\bin\Debug\Milionerzy.exe
+C:\Users\Kacper\Desktop\Milionerzy\Milionerzy\bin\Debug\Milionerzy.pdb
+C:\Users\Kacper\Desktop\Milionerzy\Milionerzy\obj\Debug\Milionerzy.exe
+C:\Users\Kacper\Desktop\Milionerzy\Milionerzy\obj\Debug\Milionerzy.pdb
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\bin\Debug\Milionerzy.exe.config
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\bin\Debug\Milionerzy.exe
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\bin\Debug\Milionerzy.pdb
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.csprojResolveAssemblyReference.cache
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.csproj.CoreCompileInputs.cache
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.exe
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.pdb
