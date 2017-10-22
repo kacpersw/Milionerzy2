@@ -4,3 +4,4 @@ C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\bin\Debug\Milionerzy.pd
 C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.Console.csproj.CoreCompileInputs.cache
 C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.exe
 C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.pdb
+C:\Users\Ibra18plus\Desktop\Milionerzy-master\Milionerzy\obj\Debug\Milionerzy.Console.csprojResolveAssemblyReference.cache

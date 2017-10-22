@@ -17,6 +17,7 @@ namespace Milionerzy
         static int answer;
         static int money;
         public static bool gameContinue;
+        public static List<string> publicAnswers;
 
         public static void checkLifebuoy()
         {
@@ -40,9 +41,8 @@ namespace Milionerzy
             }
             if (answer == 5 && !game.publicQuestion)
             {
-                Menu.showPublicAnswers(game.publicQuestionFunction());
-                answer = int.Parse(Console.ReadLine());
-                Console.Clear();
+                Console.WriteLine();
+                publicAnswers = Menu.showPublicAnswers(game.publicQuestionFunction());
             }
             if (answer < 4)
             {
@@ -91,7 +91,8 @@ namespace Milionerzy
                         {
                             Menu.showMoney(game.levels, game.currentLevel);
                             Menu.showQuestion(game.getQuestion());
-                            answer = Menu.getAnswerItem(Menu.getAnswers(game.getQuestion()), Menu.getLifebuoys(game));
+                            answer = Menu.getAnswerItem(Menu.getAnswers(game.getQuestion()), Menu.getLifebuoys(game), publicAnswers);
+                            publicAnswers = null;
                             checkLifebuoy();
                             if (answer > 4)
                                 checkLifebuoy();

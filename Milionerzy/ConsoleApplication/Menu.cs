@@ -43,7 +43,7 @@ namespace Milionerzy.ConsoleApplication
             return lifebuoys;
         }
 
-        public static int getAnswerItem(string[] answers, string[] lifebuoys)
+        public static int getAnswerItem(string[] answers, string[] lifebuoys, List<string> publicAnswers)
         {
             int count = 0;
             for(int i=0; i<lifebuoys.Length;i++)
@@ -118,6 +118,16 @@ namespace Milionerzy.ConsoleApplication
                     }
                 }
                 drawLine();
+                Console.WriteLine();
+                if(publicAnswers != null)
+                {
+                    foreach (var publicAnswer in publicAnswers)
+                    {
+                        Console.Write(publicAnswer);
+                        writeSentence(publicAnswer);
+                    }
+                    drawLine();
+                }
 
                 bottomOffset = Console.CursorTop;
 
@@ -181,6 +191,8 @@ namespace Milionerzy.ConsoleApplication
                 if (lifebuoys[1] == string.Empty)
                     selectedItem = 6;
             }
+
+
             return selectedItem;
         }
 
@@ -413,19 +425,23 @@ namespace Milionerzy.ConsoleApplication
 
 
 
-        public static void showPublicAnswers(int[] publicAnswers)
+        public static List<string> showPublicAnswers(int[] publicAnswers)
         {
+            List<string> answers = new List<string>();
+
             if (publicAnswers[0] > 0)
-                Console.WriteLine("Odpowiedź A: " + publicAnswers[0] + "%");
+                answers.Add("| Odpowiedź A: " + publicAnswers[0] + "%");
 
             if (publicAnswers[1] > 0)
-                Console.WriteLine("Odpowiedź B: " + publicAnswers[1] + "%");
+                answers.Add("| Odpowiedź B: " + publicAnswers[1] + "%");
 
             if (publicAnswers[2] > 0)
-                Console.WriteLine("Odpowiedź C: " + publicAnswers[2] + "%");
+                answers.Add("| Odpowiedź C: " + publicAnswers[2] + "%");
 
             if (publicAnswers[3] > 0)
-                Console.WriteLine("Odpowiedź D: " + publicAnswers[3] + "%");
+                answers.Add("| Odpowiedź D: " + publicAnswers[3] + "%");
+
+            return answers;
         }
 
         public static string[] getMenuItems()
