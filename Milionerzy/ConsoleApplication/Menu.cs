@@ -43,10 +43,17 @@ namespace Milionerzy.ConsoleApplication
             return lifebuoys;
         }
 
-        public static int getAnswerItem(string[] answers, string[] lifebuoys, List<string> publicAnswers)
+        public static int getAnswerItem(string[] answers, string[] lifebuoys, List<string> publicAnswers, List<int> rejects)
         {
             int count = 0;
-            for(int i=0; i<lifebuoys.Length;i++)
+
+            if (rejects != null)
+            {
+                answers[rejects[0]] = string.Empty;
+                answers[rejects[1]] = string.Empty;
+            }
+
+            for (int i=0; i<lifebuoys.Length;i++)
             {
                 if (lifebuoys[i] != string.Empty)
                     count++;
@@ -88,7 +95,7 @@ namespace Milionerzy.ConsoleApplication
                 for (int i = 0; i < inArray.Length; i++)
                 {
 
-                    if (i == selectedItem && inArray[i] != string.Empty)
+                    if (i == selectedItem && ((inArray[i] != string.Empty && i>3) || i<4))
                     {//This section is what highlights the selected item
 
                         Console.BackgroundColor = ConsoleColor.Gray;
@@ -99,7 +106,7 @@ namespace Milionerzy.ConsoleApplication
                         topOffset = Console.CursorTop;
                         Console.SetCursorPosition(0, topOffset);
                     }
-                    else if (inArray[i] != string.Empty)
+                    else if ((inArray[i] != string.Empty && i>3) || i<4)
                     {//this section is what prints unselected items
 
                         Console.Write(abcd[i] + inArray[i]);
@@ -162,7 +169,18 @@ namespace Milionerzy.ConsoleApplication
                         break;
 
                     case ConsoleKey.Enter:
-                        loopComplete = true;
+                        if (selectedItem < 4)
+                        {
+                            if (answers[selectedItem] != string.Empty)
+                            {
+                                loopComplete = true;
+                            }
+                            
+                        }
+                        else
+                        {
+                            loopComplete = true;
+                        }
                         break;
                 }
                 //Reset the cursor to the top of the screen
