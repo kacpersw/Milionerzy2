@@ -21,9 +21,16 @@ namespace Milionerzy.Logic
                 money
                 ));
 
-            results = results.OrderBy(x => x.Points).ToList();
+            if(results.Count>=20)
+            {
+                results = results.OrderBy(x => x.Points).Take(20).ToList();
+            }
+            else
+            {
+                results = results.OrderBy(x => x.Points).ToList();
+            }
 
-            using(StreamWriter sw = new StreamWriter("wyniki.txt"))
+            using (StreamWriter sw = new StreamWriter("wyniki.txt"))
             {
                 for (int i = results.Count-1; i >= 0; i--)
                 {

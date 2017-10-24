@@ -69,7 +69,7 @@ namespace Milionerzy.Logic
         {
             Random rand = new Random();
             int[] randomAnswers = new int[4];
-            int correctAnswerRandom = rand.Next(48, 100);
+            int correctAnswerRandom = rand.Next(45, 100);
 
             for (int i = 0; i<4; i++)
             {
@@ -87,7 +87,7 @@ namespace Milionerzy.Logic
         {
             Random rand = new Random();
             int[] randomAnswers = new int[4];
-            int correctAnswerRandom = rand.Next(40, 70);
+            int correctAnswerRandom = rand.Next(30, 70);
             int incorrectAnswerRandom1 = 70 - correctAnswerRandom;
             int incorrectAnswerRandom2 = rand.Next(30);
             int incorrectAnswerRandom3 = 30 - incorrectAnswerRandom2;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Milionerzy.ConsoleApplication
@@ -43,7 +44,7 @@ namespace Milionerzy.ConsoleApplication
             return lifebuoys;
         }
 
-        public static int getAnswerItem(string[] answers, string[] lifebuoys, List<string> publicAnswers, List<int> rejects)
+        public static int getAnswerItem(string[] answers, string[] lifebuoys, List<string> publicAnswers, List<int> rejects, Game game)
         {
             int count = 0;
 
@@ -53,7 +54,7 @@ namespace Milionerzy.ConsoleApplication
                 answers[rejects[1]] = string.Empty;
             }
 
-            for (int i=0; i<lifebuoys.Length;i++)
+            for (int i = 0; i < lifebuoys.Length; i++)
             {
                 if (lifebuoys[i] != string.Empty)
                     count++;
@@ -81,22 +82,19 @@ namespace Milionerzy.ConsoleApplication
 
             Console.CursorVisible = false;
 
-            //this will resise the console if the amount of elements in the list are too big
             if ((inArray.Length) > Console.WindowHeight)
             {
                 throw new Exception("Too many items in the array to display");
             }
 
-            /**
-             * Drawing phase
-             * */
+
             while (!loopComplete)
-            {//This for loop prints the array out
+            {
                 for (int i = 0; i < inArray.Length; i++)
                 {
 
-                    if (i == selectedItem && ((inArray[i] != string.Empty && i>3) || i<4))
-                    {//This section is what highlights the selected item
+                    if (i == selectedItem && ((inArray[i] != string.Empty && i > 3) || i < 4))
+                    {
 
                         Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -106,8 +104,8 @@ namespace Milionerzy.ConsoleApplication
                         topOffset = Console.CursorTop;
                         Console.SetCursorPosition(0, topOffset);
                     }
-                    else if ((inArray[i] != string.Empty && i>3) || i<4)
-                    {//this section is what prints unselected items
+                    else if ((inArray[i] != string.Empty && i > 3) || i < 4)
+                    {
 
                         Console.Write(abcd[i] + inArray[i]);
                         writeSentence(abcd[i] + inArray[i]);
@@ -126,7 +124,7 @@ namespace Milionerzy.ConsoleApplication
                 }
                 drawLine();
                 Console.WriteLine();
-                if(publicAnswers != null)
+                if (publicAnswers != null)
                 {
                     foreach (var publicAnswer in publicAnswers)
                     {
@@ -138,14 +136,23 @@ namespace Milionerzy.ConsoleApplication
 
                 bottomOffset = Console.CursorTop;
 
-                /*
-                 * User input phase
-                 * */
+                Console.Write("| Aby wycofać się z gry wciśnij klawisz ESC");
+                writeSentence("| Aby wycofać się z gry wciśnij klawisz ESC");
 
-                kb = Console.ReadKey(true); //read the keyboard
+
+                kb = Console.ReadKey(true);
 
                 switch (kb.Key)
-                { //react to input
+                {
+                    case ConsoleKey.Escape:
+                        selectedItem = 7;
+                        loopComplete = true;
+                        Console.Write("| GRATULACJE!!! Twoja wygrana wynosi: " + game.endOfGame(false));
+                        writeSentence("| GRATULACJE!!! Twoja wygrana wynosi: " + game.endOfGame(false));
+                        drawLine();
+                        Thread.Sleep(5000);
+
+                        break;
                     case ConsoleKey.UpArrow:
                         if (selectedItem > 0)
                         {
@@ -175,7 +182,7 @@ namespace Milionerzy.ConsoleApplication
                             {
                                 loopComplete = true;
                             }
-                            
+
                         }
                         else
                         {
@@ -183,10 +190,9 @@ namespace Milionerzy.ConsoleApplication
                         }
                         break;
                 }
-                //Reset the cursor to the top of the screen
+
                 Console.SetCursorPosition(0, a);
             }
-            //set the cursor just after the menu so that the program can continue after the menu
             Console.SetCursorPosition(40, bottomOffset);
 
             Console.CursorVisible = true;
@@ -229,22 +235,20 @@ namespace Milionerzy.ConsoleApplication
 
             Console.CursorVisible = false;
 
-            //this will resise the console if the amount of elements in the list are too big
+
             if ((inArray.Length) > Console.WindowHeight)
             {
                 throw new Exception("Too many items in the array to display");
             }
 
-            /**
-             * Drawing phase
-             * */
+
             while (!loopComplete)
-            {//This for loop prints the array out
+            {
                 for (int i = 0; i < inArray.Length; i++)
                 {
 
                     if (i == selectedItem)
-                    {//This section is what highlights the selected item
+                    {
 
                         Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -254,7 +258,7 @@ namespace Milionerzy.ConsoleApplication
                         Console.SetCursorPosition(40, topOffset);
                     }
                     else
-                    {//this section is what prints unselected items
+                    {
 
                         Console.WriteLine(inArray[i]);
                         topOffset = Console.CursorTop;
@@ -264,14 +268,12 @@ namespace Milionerzy.ConsoleApplication
 
                 bottomOffset = Console.CursorTop;
 
-                /*
-                 * User input phase
-                 * */
 
-                kb = Console.ReadKey(true); //read the keyboard
+
+                kb = Console.ReadKey(true);
 
                 switch (kb.Key)
-                { //react to input
+                {
                     case ConsoleKey.UpArrow:
                         if (selectedItem > 0)
                         {
@@ -298,10 +300,9 @@ namespace Milionerzy.ConsoleApplication
                         loopComplete = true;
                         break;
                 }
-                //Reset the cursor to the top of the screen
+
                 Console.SetCursorPosition(40, 7);
             }
-            //set the cursor just after the menu so that the program can continue after the menu
             Console.SetCursorPosition(40, bottomOffset);
 
             Console.CursorVisible = true;
@@ -335,17 +336,7 @@ namespace Milionerzy.ConsoleApplication
 
             Console.ResetColor();
             Console.WriteLine();
-            //Console.Write("| a) " + question.Answers[0]);
-            //writeSentence(question.Answers[0]);
-            //Console.Write("| b) " + question.Answers[1]);
-            //writeSentence(question.Answers[1]);
-            //Console.Write("| c) " + question.Answers[2]);
-            //writeSentence(question.Answers[2]);
-            //Console.Write("| d) " + question.Answers[3]);
-            //writeSentence(question.Answers[3]);
 
-            //drawLine();
-            //Console.WriteLine();
         }
 
         public static void showLifebuoy(Game game)
@@ -482,12 +473,38 @@ namespace Milionerzy.ConsoleApplication
         public static void showResults(List<Result> results)
         {
             Console.Clear();
-            Console.WriteLine("Wyniki");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            drawLine();
+            Console.WriteLine();
+            Console.Write("| TOP 20 najlepszych wyników");
+            writeSentence("| TOP 20 najlepszych wyników");
+            drawLine();
+            Console.ResetColor();
+            Console.WriteLine();
+            int count = 1;
+            int count2 = 0;
             for (int i = 0; i < results.Count; i++)
             {
-                Console.WriteLine(i + 1 + "." + results[i].Name + "   " + results[i].Points);
+                Console.Write("|" + count + "." + results[i].Name + "   " + results[i].Points);
+                writeSentence("|" + count + "." + results[i].Name + "   " + results[i].Points);
+                Console.WriteLine();
+                if (i < results.Count-1)
+                    if (results[i + 1].Points < results[i].Points)
+                    {
+                        count+=count2+1;
+                        count2 = 0;
+                    }
+                else
+                    {
+                        count2++;
+                    }
             }
-            Console.ReadKey();
+
+            drawLine();
+            Console.WriteLine();
+            Console.WriteLine("Aby powrócić do menu, kliknij dowolny klawisz klawiatury");
+            Console.CursorVisible = false;
+            Console.ReadKey(true);
         }
     }
 }

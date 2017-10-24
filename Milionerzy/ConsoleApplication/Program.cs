@@ -26,6 +26,7 @@ namespace Milionerzy
             {
                 gameContinue = false;
                 money = game.endOfGame(false);
+                Console.Clear();
                 RWResults.writeResults(name, money);
             }
             if (answer == 6 && !game.changeQuestion)
@@ -36,12 +37,15 @@ namespace Milionerzy
             if (answer == 4 && !game.fiftyFifty)
             {
                 game.fiftyFiftyFunction();
-                rejects = new List<int>{ game.getQuestion().Reject1, game.getQuestion().Reject2};
+                rejects = new List<int> { game.getQuestion().Reject1, game.getQuestion().Reject2 };
             }
             if (answer == 5 && !game.publicQuestion)
             {
                 Console.WriteLine();
                 publicAnswers = Menu.showPublicAnswers(game.publicQuestionFunction());
+                if (game.getQuestion().FiftyFifty == true)
+                    rejects = new List<int> { game.getQuestion().Reject1, game.getQuestion().Reject2 };
+
             }
             if (answer < 4)
             {
@@ -49,6 +53,12 @@ namespace Milionerzy
                 if (!gameContinue)
                 {
                     money = game.endOfGame(true);
+                    Console.WriteLine();
+                    Console.Write("| Niepoprawna odpowiedz!!! Twoja wygrana wynosi: " + money);
+                    Menu.writeSentence("| Niepoprawna odpowiedz!!! Twoja wygrana wynosi: " + money);
+                    Menu.drawLine();
+                    Thread.Sleep(5000);
+                    RWResults.writeResults(name, money);
                     RWResults.writeResults(name, money);
                 }
                 else
@@ -57,7 +67,10 @@ namespace Milionerzy
                     {
                         gameContinue = false;
                         money = game.endOfGame(false);
-                        Console.WriteLine("Wygrales");
+                        Console.Write("| GRATULACJE!!! Twoja wygrana wynosi: " + money);
+                        Menu.writeSentence("| GRATULACJE!!! Twoja wygrana wynosi: " + money);
+                        Menu.drawLine();
+                        Thread.Sleep(5000);
                         RWResults.writeResults(name, money);
                     }
                 }
@@ -90,18 +103,16 @@ namespace Milionerzy
                         {
                             Menu.showMoney(game.levels, game.currentLevel);
                             Menu.showQuestion(game.getQuestion());
-                            answer = Menu.getAnswerItem(Menu.getAnswers(game.getQuestion()), Menu.getLifebuoys(game), publicAnswers, rejects);
+                            answer = Menu.getAnswerItem(Menu.getAnswers(game.getQuestion()), Menu.getLifebuoys(game), publicAnswers, rejects, game);
                             publicAnswers = null;
                             rejects = null;
                             checkLifebuoy();
-                            if (answer > 4)
+                            if (answer > 4 && answer!=7)
                                 checkLifebuoy();
-                            if (answer > 4)
+                            if (answer > 4 && answer!=7)
                                 checkLifebuoy();
 
                         }
-                        Console.WriteLine(money);
-                        Console.ReadKey();
                         break;
 
                     case 1:
@@ -118,7 +129,7 @@ namespace Milionerzy
                     default:
                         break;
                 }
-                
+
 
             }
         }
