@@ -73,6 +73,10 @@ namespace Milionerzy
                         Thread.Sleep(5000);
                         RWResults.writeResults(name, money);
                     }
+                    else
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
             }
         }
@@ -86,7 +90,6 @@ namespace Milionerzy
             Console.SetCursorPosition(40, 9);
             name = Console.ReadLine();
             Console.Clear();
-            ConsoleKeyInfo option;
 
             int selectedItem = 0;
             while (true)

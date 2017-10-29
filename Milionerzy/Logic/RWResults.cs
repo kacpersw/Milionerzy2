@@ -23,7 +23,7 @@ namespace Milionerzy.Logic
 
             if(results.Count>=20)
             {
-                results = results.OrderBy(x => x.Points).Take(20).ToList();
+                results = results.OrderBy(x => -x.Points).Take(20).ToList();
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Milionerzy.Logic
 
             using (StreamWriter sw = new StreamWriter("wyniki.txt"))
             {
-                for (int i = results.Count-1; i >= 0; i--)
+                for (int i = 0; i < results.Count ; i++)
                 {
                     sw.WriteLine(results[i].Name);
                     sw.WriteLine(results[i].Points);

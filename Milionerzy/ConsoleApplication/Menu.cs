@@ -2,6 +2,7 @@
 using Milionerzy.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -224,7 +225,14 @@ namespace Milionerzy.ConsoleApplication
         public static int getMenuItems(string[] inArray)
         {
             Console.Clear();
-            Console.SetCursorPosition(40, 7);
+
+            string filename = "file.png";
+            AsciiArt ascii = new AsciiArt(Image.FromFile(filename), 100, 60);
+            string result = ascii.Generate();
+            Console.Write(result);
+
+            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(40, 13);
 
             bool loopComplete = false;
             int topOffset = Console.CursorTop;
@@ -301,7 +309,7 @@ namespace Milionerzy.ConsoleApplication
                         break;
                 }
 
-                Console.SetCursorPosition(40, 7);
+                Console.SetCursorPosition(40, 13);
             }
             Console.SetCursorPosition(40, bottomOffset);
 
